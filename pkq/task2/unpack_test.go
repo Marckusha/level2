@@ -3,6 +3,8 @@ package task2
 import (
 	"level2/pkq/task2"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestUnpuck(t *testing.T) {
@@ -26,15 +28,8 @@ func TestUnpuck(t *testing.T) {
 	}
 
 	for _, test := range testCases {
-		result, err := task2.Unpack(test.str)
-
-		if err != nil {
-			t.Errorf("test for OK Failed - error %v", err)
-		}
-		if result != test.expStr {
-			t.Errorf("test for OK Failed - result not match\n %v %v", result, test.expStr)
-		}
-
+		result, _ := task2.Unpack(test.str)
+		assert.Equal(t, result, test.expStr, "error")
 	}
 }
 
