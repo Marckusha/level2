@@ -5,45 +5,36 @@ import (
 	"testing"
 )
 
-func TestUnpuck1(t *testing.T) {
-	var data = "a4bc2d5e"
-	var testOk = "aaaabccddddde"
+func TestUnpuck(t *testing.T) {
 
-	result, err := task2.Unpack(data)
-
-	if err != nil {
-		t.Errorf("test for OK Failed - error %v", err)
+	testCases := []struct {
+		str    string
+		expStr string
+	}{
+		{
+			str:    "a4bc2d5e",
+			expStr: "aaaabccddddde",
+		},
+		{
+			str:    "abcd",
+			expStr: "abcd",
+		},
+		{
+			str:    "",
+			expStr: "",
+		},
 	}
-	if result != testOk {
-		t.Errorf("test for OK Failed - result not match\n %v %v", result, testOk)
-	}
-}
 
-func TestUnpuck2(t *testing.T) {
-	var data = "abcd"
-	var testOk = "abcd"
+	for _, test := range testCases {
+		result, err := task2.Unpack(test.str)
 
-	result, err := task2.Unpack(data)
+		if err != nil {
+			t.Errorf("test for OK Failed - error %v", err)
+		}
+		if result != test.expStr {
+			t.Errorf("test for OK Failed - result not match\n %v %v", result, test.expStr)
+		}
 
-	if err != nil {
-		t.Errorf("test for OK Failed - error %v", err)
-	}
-	if result != testOk {
-		t.Errorf("test for OK Failed - result not match\n %v %v", result, testOk)
-	}
-}
-
-func TestUnpuck3(t *testing.T) {
-	var data = ""
-	var testOk = ""
-
-	result, err := task2.Unpack(data)
-
-	if err != nil {
-		t.Errorf("test for OK Failed - error %v", err)
-	}
-	if result != testOk {
-		t.Errorf("test for OK Failed - result not match\n %v %v", result, testOk)
 	}
 }
 
@@ -52,6 +43,6 @@ func TestUnpuckForError(t *testing.T) {
 	_, err := task2.Unpack(data)
 
 	if err == nil {
-		t.Errorf("test for OK Failed - error"
+		t.Errorf("test for OK Failed - error")
 	}
 }
