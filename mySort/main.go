@@ -15,8 +15,17 @@ limitations under the License.
 */
 package main
 
-import "mySort/cmd"
+import (
+	"fmt"
+	"mySort/cmd"
+	"os"
+)
 
 func main() {
-  cmd.Execute()
+	os.Args = append(os.Args, "file1.txt", "-c")
+
+	c := cmd.NewCommand()
+	cmd.SetFlags(c)
+	c.Execute()
+	fmt.Println(cmd.TestString)
 }

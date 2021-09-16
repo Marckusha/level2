@@ -29,6 +29,20 @@ func NewArrayStrings(str []string) ArrayStrings {
 	return arr
 }
 
+func (ar1 ArrayStrings) Equal(ar2 ArrayStrings) bool {
+	if len(ar1) != len(ar2) {
+		return false
+	}
+
+	for i := 0; i < len(ar1); i++ {
+		if ar1[i].Value != ar2[i].Value {
+			return false
+		}
+	}
+
+	return true
+}
+
 //устанавливаем колонку, по которой производится сортировка
 //одновременно инициализируем IndexValue
 func (str ArrayStrings) SetSortColumn(v int) {
@@ -83,7 +97,6 @@ func (ar ArrayStrings) IgnoreSpace() {
 }
 
 func (s ArrayStrings) StandartSort(i, j int) bool {
-	fmt.Println(s[i].IndexValue, s[j].IndexValue)
 	return s[i].IndexValue < s[j].IndexValue
 }
 
@@ -124,6 +137,12 @@ func (s ArrayStrings) MonthSort(i, j int) bool {
 	}
 
 	return fVal <= sVal
+}
+
+func (s ArrayStrings) Reverse() {
+	for i, j := 0, len(s)-1; i < j; i, j = i+1, j-1 {
+		s[i], s[j] = s[j], s[i]
+	}
 }
 
 //проверка сортирован ли массив или нет
