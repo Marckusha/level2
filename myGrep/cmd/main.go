@@ -16,14 +16,18 @@ limitations under the License.
 package main
 
 import (
-	"level2/myGrep/pkg/root"
+	"fmt"
 )
 
 //TODO
 //set color find symbols
 
 func main() {
-	c := root.NewCommand()
+	/*c := root.NewCommand()
 	root.SetFlags(c)
-	c.Execute()
+	c.Execute()*/
+
+	fields := make([]int, 0, 10)
+	fields = append(fields, 10)
+	fmt.Println(fields)
 }
